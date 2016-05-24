@@ -1,0 +1,24 @@
+body{
+  background-color: #000000;
+  color:#ffffff;
+  margin: 50px;
+}
+
+#maze{
+  border: 1px #ffffff solid;
+  display: inline-block;
+}
+
+.maze-case{
+  width: 20px;
+  height:20px;
+  border: 1px #000000 solid;
+}
+
+.down{
+  border-bottom-color: #ffffff;
+}
+
+.right{
+  border-right-color: #ffffff;
+}

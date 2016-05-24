@@ -1,0 +1,22 @@
+{
+  "name": "labi_rinte",
+  "version": "1.0.0",
+  "description": "Tp traitant de la génération ET résolution d'un labyrinthe.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cyriaqu3/L-habit-Rinte.git"
+  },
+  "author": "Cyriaque DELAUNAY",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cyriaqu3/L-habit-Rinte/issues"
+  },
+  "homepage": "https://github.com/Cyriaqu3/L-habit-Rinte#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
