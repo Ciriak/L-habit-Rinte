@@ -9,8 +9,8 @@ function genMaze(width,height){
         down:false,
         right:false,
         connected:false,
-        x : w,
-        y : h
+        x : w+1,
+        y : h+1
       };
       cases.push(c);
     }
