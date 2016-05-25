@@ -12,9 +12,10 @@
       <div class="col-md-8">
         <form class="form-inline">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Past pattern here">
+            <textarea name="name" rows="4" cols="40" placeholder="Past pattern here" id="mazePattern" class="form-control"></textarea>
           </div>
-          <button type="submit" class="btn btn-default">GENERATE</button>
+          <button type="button" class="btn btn-primary" id="generateMazeButton">GENERATE</button>
+          <button type="button" class="btn btn-default" id="resolveMazeButton">RESOLVE</button>
         </form>
 
         <div id="maze">
@@ -29,6 +30,7 @@
 
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+  <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>
+  <script src="https://qiao.github.io/PathFinding.js/visual/lib/pathfinding-browser.min.js"></script>
   <script src="script.js"></script>
 </html>

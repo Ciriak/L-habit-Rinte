@@ -9,16 +9,36 @@ body{
   display: inline-block;
 }
 
-.maze-case{
+.maze-cell{
   width: 20px;
   height:20px;
-  border: 1px #000000 solid;
+  border: 1px #ffffff solid;
+  color: #3c3c3c;
 }
 
 .down{
-  border-bottom-color: #ffffff;
+  border-bottom-color: #000000;
 }
 
 .right{
-  border-right-color: #ffffff;
+  border-right-color: #000000;
+}
+
+.connected{
+  /*background-color: #212121;*/
+}
+
+.light{
+  background-color: #cccccc;
+}
+
+.visited{
+  /*background-color: #cccccc;*/
+}
+
+.start{
+  background-color: green;
+}
+.end{
+  background-color: red;
 }
