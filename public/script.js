@@ -234,7 +234,7 @@ function animateCase(value,index) {
   to[toc] = setTimeout(function() {
     $("#maze-cell-"+value).addClass("visited");
     $("#maze-cell-"+value).addClass("light");
-  }, 50*(index+1));
+  }, 10*(index+1));
 }
 
 function clearAllTimeOut(){
@@ -323,7 +323,8 @@ function solveMaze(maze){
 $("#generateMazeButton").click(function(e){
   var t = $("#mazePattern").val();
   if(t == ""){
-    var maze = genMaze(20,20);
+    var dim = parseInt($("#mazeDim").val());
+    var maze = genMaze(dim,dim);
     writeMaze(maze);
     $("#mazePattern").val(JSON.stringify(maze));
   }
@@ -332,6 +333,13 @@ $("#generateMazeButton").click(function(e){
     writeMaze(JSON.parse(t));
   }
 
+});
+
+$("#newMazeButton").click(function(){
+  var dim = parseInt($("#mazeDim").val());
+  var maze = genMaze(dim,dim);
+  $("#mazePattern").val(JSON.stringify(maze));
+  writeMaze(maze);
 });
 
 $("#resolveMazeButton").click(function(e){

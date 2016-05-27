@@ -13,15 +13,16 @@
         <form class="form-inline">
           <div class="form-group">
             <textarea name="name" rows="4" cols="40" placeholder="Past pattern here" id="mazePattern" class="form-control"></textarea>
+            <input type="number" class="form-control" id="mazeDim" value="10" placeholder="Dimensions" max="100" min="1">
           </div>
           <button type="button" class="btn btn-primary" id="generateMazeButton">GENERATE</button>
-          <button type="button" class="btn btn-default" id="resolveMazeButton">RESOLVE</button>
+          <button type="button" class="btn btn-default" id="newMazeButton">RELOAD</button>
+          <button type="button" class="btn btn-success" id="resolveMazeButton">RESOLVE</button>
         </form>
-
-        <div id="maze">
-          <table></table>
-        </div>
       </div>
+    </div>
+    <div id="maze">
+      <table></table>
     </div>
   </body>
 
