@@ -71,6 +71,12 @@ function genMaze(width,height){
     }
   }
 
+  for (var i = 0; i < cells.length; i++) {
+    delete cells[i].x;
+    delete cells[i].y;
+    delete cells[i].visited;
+  }
+
   var r = {
     width : width,
     height : height,
