@@ -23,6 +23,14 @@ function genMaze(width,height){
 
 
   while (generating) {
+
+    //stop the process if invalid cell
+    if(!cells[cellIndex]){
+      generating = false;
+      alert("Nice try");
+      return false;
+    }
+
     visitHistory.push(cellIndex);
     cells[cellIndex].visited = true;
 
@@ -251,6 +259,14 @@ function solveMaze(maze){
   var visitHistory = [];
 
   var tempCells = [];
+
+  //stop the process if invalid maze
+  if(!maze.cells){
+    solving = false;
+    alert("Seriously...stop");
+    return false;
+  }
+
   var finalCell = maze.cells.length-1;
 
   for (var h = 0; h < maze.height; h++) {
