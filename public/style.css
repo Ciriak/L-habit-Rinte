@@ -24,6 +24,14 @@ body{
   border-right-color: #000000;
 }
 
+.resolve{
+  background-color:rgba(0, 255, 0, 0.9);
+}
+
+.path{
+  background-color:rgba(0, 255, 0, 0.2)!important;
+}
+
 .light{
   animation-name: lightAnim;
   animation-duration: 1s;

@@ -37,16 +37,12 @@ function genMaze(width,height){
 
       //stop the process if last row
       if(visitHistory.indexOf(cellIndex) == 0){
-        generating = false;
-      }
-
-      console.log("Go back to "+cellIndex);
-
-      if(cellIndex <= -1){
         console.log("All cases has been visited, done !");
         console.log(visitHistory);
         generating = false;
       }
+
+      console.log("Go back to "+cellIndex);
     }
     //if no 'brother'  unvisited, select a random unvisited bro and set it as the current cell
     else{
@@ -133,6 +129,53 @@ function findUnvisitedBro(cells,cellIndex){
   return unVisitedBro;
 }
 
+
+function findVisitableBro(cells,cellIndex){
+
+  var availableBro = [];
+
+  var currentCell = cells[cellIndex];
+
+  //if we can go right AND the right bro is not visited , right is available
+  if(currentCell.right){
+    var rightBro = _.findIndex(cells, { 'x': currentCell.x+1, 'y': currentCell.y, 'visited':false });
+    if(rightBro > -1){
+      console.log(cellIndex+" can go right");
+      availableBro.push(rightBro);
+    }
+  }
+
+  //if we can go down AND the down bro is not visited , down is available
+  if(currentCell.down){
+    var downBro = _.findIndex(cells, { 'x': currentCell.x, 'y': currentCell.y+1, 'visited':false });
+    if(downBro > -1){
+      console.log(cellIndex+" can go down");
+      availableBro.push(downBro);
+    }
+  }
+
+  //we check the top bro, if he can go down... so the current cell can go up
+  var upBro = _.findIndex(cells, { 'x': currentCell.x, 'y': currentCell.y-1, 'visited':false });
+  if(upBro > -1){
+    if(cells[upBro].down){
+      console.log(cellIndex+" can go up");
+      availableBro.push(upBro);
+    }
+  }
+
+  //we check the left bro, if he can go right... so the current cell can go left
+  var leftBro = _.findIndex(cells, { 'x': currentCell.x-1, 'y': currentCell.y, 'visited':false });
+  if(leftBro > -1){
+    if(cells[leftBro].right){
+      console.log(cellIndex+" can go left");
+      availableBro.push(leftBro);
+    }
+  }
+
+  return availableBro;
+
+}
+
 function writeMaze(maze){
   console.log("Generating ...");
   console.log(maze);
@@ -177,25 +220,134 @@ function writeMaze(maze){
 
 }
 
+function writeMazePath(path){
+  $(".maze-cell").removeClass("path");
+  for (var i = 0; i < path.length; i++) {
+    $("#maze-cell-"+path[i]).addClass("path");
+
+  }
+}
+
+var to = [];
 function animateCase(value,index) {
-  setTimeout(function() {
+  toc = to.length;
+  to[toc] = setTimeout(function() {
+    $("#maze-cell-"+value).addClass("visited");
     $("#maze-cell-"+value).addClass("light");
   }, 50*(index+1));
 }
 
-function solveMaze(maze){
+function clearAllTimeOut(){
+  for (var i = 0; i < to.length; i++) {
+    clearTimeout(to[i]);
+  }
+  $(".maze-cell").removeClass("visited");
+}
 
+function solveMaze(maze){
+  var solving = true;
+  var cellIndex = 0;
+  var to = 0;
+  var visitHistory = [];
+
+  var tempCells = [];
+  var finalCell = maze.cells.length-1;
+
+  for (var h = 0; h < maze.height; h++) {
+    for (var w = 0; w < maze.width; w++) {
+      var c = {
+        x : w+1,
+        y : h+1
+      };
+      tempCells.push(c);
+    }
+  }
+
+  for (var i = 0; i < maze.cells.length; i++) {
+    maze.cells[i].visited = false;
+    maze.cells[i].x = tempCells[i].x;
+    maze.cells[i].y = tempCells[i].y;
+  }
+
+
+  while (solving) {
+
+    if(cellIndex == finalCell){
+      console.log("Success");
+      solving = false;
+      console.log(visitHistory);
+      return visitHistory;
+    }
+
+    console.log("Current cell : "+cellIndex);
+    visitHistory.push(cellIndex);
+    maze.cells[cellIndex].visited = true;
+
+    // find the connected (and unvisited) neightborhood
+    var visitableBro = findVisitableBro(maze.cells,cellIndex);
+    if(visitableBro.length == 0){
+      //all bro are visited, return to prec cell
+
+      console.log("Go back to "+cellIndex);
+      var io = visitHistory.indexOf(cellIndex);
+      cellIndex = visitHistory[io-1];
+
+      // remove the bad path (everything after the last good cell)
+      for (var i = 0; i < visitHistory.length; i++) {
+        var t = visitHistory.indexOf(visitHistory[i]);
+        if(t >= io){
+          //maze.cells[visitHistory[t]].visited = false;
+          delete visitHistory[t];
+        }
+
+      }
+
+      //stop the process if last row
+      if(visitHistory.indexOf(cellIndex) == 0){
+        console.log("This maze IS FUCKING IMPOSSIBLE !");
+        console.log(visitHistory);
+        solving = false;
+        return false;
+      }
+    }
+    //Select the next cell, must be a bro, unvisited AND available
+    else{
+
+      var nextBro = visitableBro[Math.floor(Math.random() * visitableBro.length)];
+      console.log("Next cell : "+nextBro);
+      cellIndex = nextBro;
+    }
+  }
 }
 
 $("#generateMazeButton").click(function(e){
-  var maze = genMaze(20,20);
   var t = $("#mazePattern").val();
   if(t == ""){
+    var maze = genMaze(20,20);
     writeMaze(maze);
     $("#mazePattern").val(JSON.stringify(maze));
   }
   else{
+    clearAllTimeOut();
     writeMaze(JSON.parse(t));
+  }
+
+});
+
+$("#resolveMazeButton").click(function(e){
+  var t = $("#mazePattern").val();
+  if(t == ""){
+    return false;
+  }
+  else{
+    var s = solveMaze(JSON.parse(t));
+    if(s){
+      clearAllTimeOut();
+      writeMazePath(s);
+    }
+    else{
+      alert("Nope");
+    }
   }
 
 });
