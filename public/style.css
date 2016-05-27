@@ -24,16 +24,18 @@ body{
   border-right-color: #000000;
 }
 
-.connected{
-  /*background-color: #212121;*/
-}
-
 .light{
-  background-color: #cccccc;
+  animation-name: lightAnim;
+  animation-duration: 1s;
 }
 
-.visited{
-  /*background-color: #cccccc;*/
+@keyframes lightAnim {
+    from {background-color: #ffffff;}
+    to {background-color: #212121;}
+}
+
+.visited.light{
+  background-color: #212121;
 }
 
 .start{

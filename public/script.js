@@ -137,7 +137,7 @@ function writeMaze(maze){
     for (var w = 0; w < maze.width; w++) {
       table.find("tr:last").append("<td class='maze-cell' id='maze-cell-"+cCount+"'></td>");
       var cellIndex = $("#maze-cell-"+cCount);
-      cellIndex.html(cCount);
+      //cellIndex.html(cCount);
       if(maze.cells[cCount].right){
         cellIndex.addClass("right");
       }
@@ -162,18 +162,19 @@ function writeMaze(maze){
   }
 
   if(maze.history){
+    //console.log(maze.history);
     for (var i = 0; i < maze.history.length; i++) {
-      animateCase(maze.history[i]);
+      animateCase(maze.history[i],i);
     }
   }
 
 
 }
 
-function animateCase(index) {
+function animateCase(value,index) {
   setTimeout(function() {
-    $("#maze-cell-"+index).addClass("light");
-  }, 100*(index+1));
+    $("#maze-cell-"+value).addClass("light");
+  }, 50*(index+1));
 }
 
 function solveMaze(maze){
