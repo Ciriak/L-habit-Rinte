@@ -4,6 +4,9 @@ Langage : **Javascript**
 Algo de génération : **Exploration récursive**
 Algo de résolution : **Backtracking**
 
+##Preview
+Une preview est disponible sur [ce codepen](http://codepen.io/Cyriaqu3/pen/YWPwMR).
+
 ##Installation
 Dans ce repo j'utilise une serveur NodeJS mais vous pouvez simplement c/c les fichiers, du moment qu'ils soient dans le même repo.
 
