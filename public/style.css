@@ -7,13 +7,35 @@ body{
 #maze{
   border: 1px #ffffff solid;
   display: inline-block;
+  -webkit-transform: rotateX(45deg) rotateZ(45deg);
+    -webkit-transform-style: preserve-3d;
 }
+
+
 
 .maze-cell{
   width: 20px;
   height:20px;
   border: 1px #ffffff solid;
   color: #3c3c3c;
+}
+
+#maze:not(.fall) .maze-cell{
+  -webkit-transform: translateZ(3em);
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: .25s;
+}
+
+#maze:not(.fall) .maze-cell:after {
+    background-color: #e55;
+    -webkit-transform: rotateX(-90deg) translateY(3em);
+    -webkit-transform-origin: 100% 100%;
+}
+/* Right */
+#maze:not(.fall) .maze-cell:before {
+    background-color: #d44;
+    -webkit-transform: rotateY(90deg) translateX(3em);
+    -webkit-transform-origin: 100% 0;
 }
 
 .down{

@@ -220,9 +220,12 @@ function writeMaze(maze){
 
   if(maze.history){
     //console.log(maze.history);
+    var c = 0;
     for (var i = 0; i < maze.history.length; i++) {
       animateCase(maze.history[i],i);
+      c++;
     }
+    setFallAnim(c);
   }
 
 
@@ -243,6 +246,13 @@ function animateCase(value,index) {
     $("#maze-cell-"+value).addClass("visited");
     $("#maze-cell-"+value).addClass("light");
   }, 10*(index+1));
+}
+
+function setFallAnim(delay){
+  var fall = setTimeout(function() {
+    $("#maze").addClass("fall");
+  }, 10*(delay+1));
+
 }
 
 function clearAllTimeOut(){
