@@ -37,3 +37,5 @@ Sinon
 - Lorsque l'on est revenu à la case de départ et qu'il n'y a plus de possibilités, le labyrinthe est terminé.
 
 ##Résolution du Labyrinthe
+
+[Lui l'explique mieux que moi](https://fr.wikipedia.org/wiki/Retour_sur_trace)
